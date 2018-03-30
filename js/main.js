@@ -7,8 +7,8 @@ const screens = [
   template.content.querySelectorAll(`.main--result`)[1],
   template.content.querySelectorAll(`.main--result`)[2]
 ];
-const ToLeftKeycode = 37;
-const ToRightKeycode = 39;
+const TO_LEFT_KEYCODE = 37;
+const TO_RIGHT_KEYCODE = 39;
 const mainScreenSection = document.querySelector(`.main`);
 
 let currentScreenIndex = 0;
@@ -28,11 +28,11 @@ const renderScreen = (num) => {
 /*переключаем экраны по нажатию на комбинации Alt + ← и Alt + →*/
 
 const toggleScreenKeydown = (event) => {
-  if (event.keyCode === ToLeftKeycode && event.altKey) {
+  if (event.keyCode === TO_LEFT_KEYCODE && event.altKey) {
     currentScreenIndex = currentScreenIndex === 0 ? screens.length - 1 : currentScreenIndex - 1;
     renderScreen(currentScreenIndex);
   }
-  if (event.keyCode === ToRightKeycode && event.altKey) {
+  if (event.keyCode === TO_RIGHT_KEYCODE && event.altKey) {
     currentScreenIndex = currentScreenIndex < screens.length - 1 ? currentScreenIndex + 1 : 0;
     renderScreen(currentScreenIndex);
   }
