@@ -13,7 +13,7 @@ const mainScreenSection = document.querySelector(`.main`);
 
 let currentScreenIndex = 0;
 
-/*показываем экран из массива screens по номеру num*/
+/* показываем экран из массива screens по номеру num */
 
 const renderScreen = (num) => {
 
@@ -25,14 +25,13 @@ const renderScreen = (num) => {
   return mainScreen;
 };
 
-/*переключаем экраны по нажатию на комбинации Alt + ← и Alt + →*/
+/* переключаем экраны по нажатию на комбинации Alt + ← и Alt + → */
 
 const toggleScreenKeydown = (event) => {
   if (event.keyCode === TO_LEFT_KEYCODE && event.altKey) {
     currentScreenIndex = currentScreenIndex === 0 ? screens.length - 1 : currentScreenIndex - 1;
     renderScreen(currentScreenIndex);
-  }
-  if (event.keyCode === TO_RIGHT_KEYCODE && event.altKey) {
+  } else if (event.keyCode === TO_RIGHT_KEYCODE && event.altKey) {
     currentScreenIndex = currentScreenIndex < screens.length - 1 ? currentScreenIndex + 1 : 0;
     renderScreen(currentScreenIndex);
   }
