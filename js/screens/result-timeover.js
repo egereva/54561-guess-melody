@@ -16,7 +16,6 @@ const resultTimeoverScreen = getElementFromTemplate(template);
 
 resultTimeoverScreen.querySelector(`.main-replay`).addEventListener(`click`, (event) => {
   event.preventDefault();
-
   renderScreen(welcomeScreen);
 });
 

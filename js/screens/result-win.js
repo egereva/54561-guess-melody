@@ -19,7 +19,6 @@ const resultWinScreen = getElementFromTemplate(template);
 
 resultWinScreen.querySelector(`.main-replay`).addEventListener(`click`, (event) => {
   event.preventDefault();
-
   renderScreen(welcomeScreen);
 });
 

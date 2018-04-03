@@ -16,7 +16,6 @@ const resultLimitScreen = getElementFromTemplate(template);
 
 resultLimitScreen.querySelector(`.main-replay`).addEventListener(`click`, (event) => {
   event.preventDefault();
-
   renderScreen(welcomeScreen);
 });
 
