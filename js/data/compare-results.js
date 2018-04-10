@@ -4,17 +4,7 @@ export const compareResults = (otherResults, result) => {
 
   /* сортируем массив с результатами всех игроков по кол-ву баллов */
 
-  const sortedResults = allResults.sort((a, b) => {
-    if (a.points < b.points) {
-      return 1;
-    }
-
-    if (a.points > b.points) {
-      return -1;
-    }
-
-    return 0;
-  });
+  const sortedResults = allResults.sort((a, b) => b.points - a.points);
 
   const place = sortedResults.findIndex((player) => player.points === result.points) + 1;
   const percent = (allResults.length - place) / allResults.length * 100;

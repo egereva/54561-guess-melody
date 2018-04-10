@@ -1,8 +1,8 @@
-export const countPoints = (answers, notes) => {
-  const FAST_RESULT = 2;
-  const ERROR_RESULT = 2;
-  const GAMEOVER_RESULT = -1;
+const FAST_RESULT = 2;
+const ERROR_RESULT = 2;
+const GAMEOVER_RESULT = -1;
 
+export const countPoints = (answers, notes) => {
   let sumPoints = 0;
 
   const countAnswers = answers.length;
