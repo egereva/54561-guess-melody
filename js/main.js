@@ -1,6 +1,7 @@
-import {renderScreen} from './renders-screen';
-import welcomeScreen from './screens/welcome';
+import {switchOverScreen} from "./switch-over-screen";
+import {store} from './data/store';
 
-/* показывает первый экран из модуля main.js при загрузке страницы */
 
-renderScreen(welcomeScreen);
+store.subscribe(switchOverScreen);
+
+switchOverScreen();
