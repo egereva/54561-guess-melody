@@ -14,7 +14,7 @@ export const countPoints = (answers, notes) => {
     return GAMEOVER_RESULT;
   }
 
-  sumPoints = fastGameResult * FAST_RESULT + slowGameResult - (errorsResult * ERROR_RESULT);
+  sumPoints = (fastGameResult * FAST_RESULT) + slowGameResult - (errorsResult * ERROR_RESULT);
 
   return sumPoints;
 };
