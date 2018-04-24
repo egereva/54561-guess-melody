@@ -93,6 +93,7 @@ export default (data) => {
     answerBtn.disabled = true;
 
     switchScreen();
+
   });
 
 

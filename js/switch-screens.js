@@ -42,7 +42,13 @@ const gameOver = (results, notes) => {
 export default () => {
   if (store.currentState.countScreens < LEVELS - 1 && store.currentState.notes > 0) {
     const screens = questions;
-    const randomQuestion = getRandomQuestion(screens);
+    const displayQuestions = store.displayQuestions;
+    let randomQuestion = getRandomQuestion(screens);
+
+    while (displayQuestions.find((item) => item === randomQuestion)) {
+      randomQuestion = getRandomQuestion(screens);
+    }
+
     if (randomQuestion.type === `artist`) {
       store.questionArtistIndex(screens.indexOf(randomQuestion));
       renderScreen(levelArtistScreen(randomQuestion));
@@ -51,6 +57,7 @@ export default () => {
       renderScreen(levelGenreScreen(randomQuestion));
     }
     store.addScreen();
+    store.addDisplayQuestions(randomQuestion);
   } else {
     gameOver(store.resultsPlayer, store.notes);
   }

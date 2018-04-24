@@ -22,6 +22,7 @@ const welcomeScreen = getElementFromTemplate(template);
 welcomeScreen.querySelector(`.main-play`).addEventListener(`click`, (event) => {
   event.preventDefault();
   renderScreen(levelArtistScreen(questionsArtist[store.initialState.questionArtistIndex]));
+  store.addDisplayQuestions(questionsArtist[store.initialState.questionArtistIndex]);
 });
 
 export default welcomeScreen;

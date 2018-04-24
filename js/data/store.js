@@ -4,6 +4,7 @@ class GameStore {
       notes: 3,
       resultsPlayer: [],
       currentResult: [],
+      displayQuestions: [],
       countScreens: 0,
       questionArtistIndex: 0,
       questionGenreIndex: 0,
@@ -43,6 +44,9 @@ class GameStore {
   get questionGenreIndex() {
     return this.currentState.questionGenreIndex;
   }
+  get displayQuestions() {
+    return this.currentState.displayQuestions;
+  }
 
   removeNote() {
     this.currentState.notes--;
@@ -64,6 +68,7 @@ class GameStore {
     this.currentState = Object.assign({}, this.initialState);
     this.currentState.resultsPlayer = [];
     this.currentState.currentResult = [];
+    this.currentState.displayQuestionst = [];
     return this;
   }
 
@@ -79,6 +84,11 @@ class GameStore {
 
   questionGenreIndex(index) {
     this.currentState.questionGenreIndex = index;
+    return this;
+  }
+
+  addDisplayQuestions(question) {
+    this.displayQuestions.push(question);
     return this;
   }
 

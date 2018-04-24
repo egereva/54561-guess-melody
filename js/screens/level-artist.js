@@ -66,6 +66,7 @@ export default (data) => {
       }
       store.appendAnswer(currentAnswer);
       switchScreen();
+
     });
   });
 
