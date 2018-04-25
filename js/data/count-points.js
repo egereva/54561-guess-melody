@@ -10,11 +10,11 @@ export const countPoints = (answers, notes) => {
   const fastGameResult = answers.filter((answer) => answer.correct && answer.speed < 30).length;
   const errorsResult = answers.filter((answer) => !answer.correct).length;
 
-  if (errorsResult >= notes || countAnswers < 10 || notes < 0) {
+  if (countAnswers < 10 || notes < 0) {
     return GAMEOVER_RESULT;
   }
 
-  sumPoints = fastGameResult * FAST_RESULT + slowGameResult - (errorsResult * ERROR_RESULT);
+  sumPoints = (fastGameResult * FAST_RESULT) + slowGameResult - (errorsResult * ERROR_RESULT);
 
   return sumPoints;
 };

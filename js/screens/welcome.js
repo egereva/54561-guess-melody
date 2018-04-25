@@ -1,6 +1,8 @@
 import {getElementFromTemplate} from '../getElementFromTemplate';
 import {renderScreen} from '../renders-screen';
 import levelArtistScreen from './level-artist';
+import questionsArtist from '../data/questions';
+import store from '../data/store';
 
 const template = `<section class="main main--welcome">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
@@ -19,7 +21,10 @@ const welcomeScreen = getElementFromTemplate(template);
 
 welcomeScreen.querySelector(`.main-play`).addEventListener(`click`, (event) => {
   event.preventDefault();
-  renderScreen(levelArtistScreen);
+  renderScreen(levelArtistScreen(questionsArtist[store.initialState.questionArtistIndex]));
+  store.addDisplayQuestions(questionsArtist[store.initialState.questionArtistIndex]);
 });
 
 export default welcomeScreen;
+
+

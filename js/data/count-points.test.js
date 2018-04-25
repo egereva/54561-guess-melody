@@ -7,8 +7,7 @@ const NOTES = 3;
 const gameOverErrors = [
   {correct: true, speed: 60}, {correct: false, speed: 35}, {correct: true, speed: 50},
   {correct: true, speed: 20}, {correct: true, speed: 40}, {correct: true, speed: 55},
-  {correct: false, speed: 37}, {correct: true, speed: 25}, {correct: true, speed: 50},
-  {correct: false, speed: 30}
+  {correct: false, speed: 37}, {correct: true, speed: 25}, {correct: true, speed: 50}
 ];
 
 const gameOverFewAnswers = [
