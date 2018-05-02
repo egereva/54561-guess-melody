@@ -14,7 +14,7 @@ export default () => {
     const displayQuestions = store.currentState.displayQuestions;
     let randomQuestion = getRandomQuestion(screens);
 
-    while (displayQuestions.find((item) => item === randomQuestion)) {
+    while (displayQuestions.includes(randomQuestion)) {
       randomQuestion = getRandomQuestion(screens);
     }
     if (randomQuestion.type === `artist`) {

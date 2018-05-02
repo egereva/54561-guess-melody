@@ -68,7 +68,7 @@ class GameStore {
     this.currentState = Object.assign({}, this.initialState);
     this.currentState.resultsPlayer = [];
     this.currentState.currentResult = [];
-    this.currentState.displayQuestionst = [];
+    this.currentState.displayQuestions = [];
     return this;
   }
 
