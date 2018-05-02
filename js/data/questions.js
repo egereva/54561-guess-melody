@@ -20,6 +20,26 @@ const questions = [
     type: `artist`
   },
   {
+    src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+    answers:
+      [
+        {
+          artist: `Маша распутина`,
+          image: `https://i.vimeocdn.com/portrait/992615_300x300`
+        },
+        {
+          artist: `Краснознаменная дивизия имени моей бабушки`,
+          image: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`
+        },
+        {
+          artist: `Lorde`,
+          image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`
+        }
+      ],
+    correct: 3,
+    type: `artist`
+  },
+  {
     src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
     answers:
       [
@@ -192,7 +212,7 @@ const questions = [
     type: `genre`
   },
   {
-    title: `Выберите инди-рок треки`,
+    title: `Выберите инди-рок треки еще раз`,
     answers: [
       {
         src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
