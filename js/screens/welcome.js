@@ -1,14 +1,21 @@
 import {renderScreen} from './../renders-screen';
-import questionsArtistScreen from './../screens/level-artist';
+import Application from './../application';
 import WelcomeView from './../view/welcome-view';
 
-export default () => {
-  const welcome = new WelcomeView();
-  welcome.startPlay = (evt) => {
-    evt.preventDefault();
-    questionsArtistScreen();
-  };
-  renderScreen(welcome);
-};
+export default class WelcomeScreen {
+  constructor(state) {
+    this.state = state;
+    this.view = new WelcomeView(this.state);
+  }
+
+  createGameLevel() {
+    this.view.startPlay = (evt) => {
+      evt.preventDefault();
+      Application.showGame();
+    };
+    renderScreen(this.view);
+  }
+
+}
 
 

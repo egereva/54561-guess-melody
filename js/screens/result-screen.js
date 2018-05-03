@@ -1,6 +1,5 @@
 import {renderScreen} from './../renders-screen';
-import welcomeScreen from './welcome';
-import store from './../data/store';
+import Application from './../application';
 import ResultView from './../view/result-view';
 import {countPoints} from './../data/count-points';
 
@@ -19,16 +18,33 @@ const RESULT_TEXT = {
   }
 };
 
-export default () => {
-  const points = countPoints(store.resultsPlayer, store.notes);
-  const currentPlayer = {};
-  currentPlayer.points = points;
-  currentPlayer.notes = store.notes;
-  const templateResult = currentPlayer.notes <= 0 ? RESULT_TEXT.notesover : RESULT_TEXT.win;
-  const view = new ResultView(store.otherResults, currentPlayer, templateResult);
-  view.onClickReplay = () => {
-    welcomeScreen();
-  };
-  store.writeResult(points);
-  renderScreen(view);
-};
+export default class ResultScreen {
+  constructor(state) {
+    this.state = state;
+  }
+
+  showResult() {
+    const points = countPoints(this.state.resultsPlayer, this.state.notes, this.state.time);
+    const currentPlayer = {};
+    currentPlayer.points = points;
+    currentPlayer.notes = this.state.notes;
+    currentPlayer.time = this.state.time;
+    let templateResult;
+    if (currentPlayer.time <= 0) {
+      templateResult = RESULT_TEXT.timeover;
+    } else if (currentPlayer.notes <= 0) {
+      templateResult = RESULT_TEXT.notesover;
+    } else {
+      templateResult = RESULT_TEXT.win;
+    }
+    this.view = new ResultView(this.state.otherResults, currentPlayer, templateResult);
+    this.view.onClickReplay = () => {
+      Application.showGame();
+    };
+    this.state.writeResult(points);
+    renderScreen(this.view);
+    this.state.reset();
+  }
+}
+
+
