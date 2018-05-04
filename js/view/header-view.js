@@ -1,5 +1,5 @@
 import AbstractView from './abstract-view';
-import {formatTime} from './../format-time';
+import {formatTime} from '../helpers';
 
 const NOTES = 3;
 export default class HeaderView extends AbstractView {

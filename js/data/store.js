@@ -11,7 +11,7 @@ class GameStore {
         {points: 8, notes: 2, time: 12},
         {points: 6, notes: 1, time: 5}
       ],
-      time: 40
+      time: 300
     });
     this.currentState = Object.assign({}, this.initialState);
   }
