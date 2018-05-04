@@ -67,6 +67,10 @@ class GameScreen {
       this._interval = setInterval(() => {
         if (this.state.time <= 0) {
           Application.showStats();
+          this.header.removeBlinkTimer();
+        }
+        if (this.state.time <= 30) {
+          this.header.addBlinkTimer();
         }
         this.state.tick();
         this.answerTime++;
