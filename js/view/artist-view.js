@@ -31,7 +31,7 @@ export default class ArtistView extends AbstractView {
         </div>
       </div>
       <form class="main-list">
-        ${this.renderAnswers(this.answers)}
+        ${this._renderAnswers(this.answers)}
       </form>
     </div>
   </section>`;
@@ -44,7 +44,7 @@ export default class ArtistView extends AbstractView {
     });
   }
 
-  renderAnswers(answers) {
+  _renderAnswers(answers) {
     return answers.map((answer, index) => `
       <div class="main-answer-wrapper">
     <input class="main-answer-r" type="radio" id="answer-${index + 1}" name="answer" value="val-${index + 1}"/>

@@ -8,11 +8,11 @@ const RESULT_TEXT = {
     h2: `Вы настоящий меломан!`,
     button: `Сыграть ещё раз`
   },
-  notesover: {
+  notesOver: {
     h2: `Какая жалость!`,
     button: `Попробовать ещё раз`
   },
-  timeover: {
+  timeOver: {
     h2: `Увы и ах!`,
     button: `Попробовать ещё раз`
   }
@@ -23,7 +23,13 @@ export default class ResultScreen {
     this.state = state;
   }
 
-  showResult() {
+  showResult(data) {
+    if (data) {
+      data.forEach((item) => {
+        const points = countPoints(item);
+        this.state.allResults.push(points);
+      });
+    }
     const points = countPoints(this.state.resultsPlayer, this.state.notes, this.state.time);
     const currentPlayer = {};
     currentPlayer.points = points;
@@ -31,13 +37,13 @@ export default class ResultScreen {
     currentPlayer.time = this.state.time;
     let templateResult;
     if (currentPlayer.time <= 0) {
-      templateResult = RESULT_TEXT.timeover;
+      templateResult = RESULT_TEXT.timeOver;
     } else if (currentPlayer.notes <= 0) {
-      templateResult = RESULT_TEXT.notesover;
+      templateResult = RESULT_TEXT.notesOver;
     } else {
       templateResult = RESULT_TEXT.win;
     }
-    this.view = new ResultView(this.state.otherResults, currentPlayer, templateResult);
+    this.view = new ResultView(this.state.allResults, currentPlayer, templateResult);
     this.view.onClickReplay = () => {
       Application.showGame();
     };
