@@ -2,10 +2,9 @@ import {getResult} from './../data/get-result';
 import AbstractView from './abstract-view';
 import store from './../data/store';
 import {countFastAnswers} from './../data/count-fast-answers';
-import {formatMin} from './../format-time';
-import {formatSec} from './../format-time';
-
-const NOTES = 3;
+import {formatMin} from '../helpers';
+import {formatSec} from '../helpers';
+import {formatErrors} from '../helpers';
 
 export default class ResultView extends AbstractView {
   constructor(otherResults, currentPlayer, templateResult) {
@@ -37,7 +36,7 @@ export default class ResultView extends AbstractView {
     } else {
       return `<div class="main-stat">За&nbsp;${formatMin(this.currentPlayer.time, store.initialState.time)} и ${formatSec(this.currentPlayer.time, store.initialState.time)}
          <br>вы&nbsp;набрали ${this.currentPlayer.points} баллов (${countFastAnswers(store.resultsPlayer)} быстрых)
-         <br>совершив ${NOTES - this.currentPlayer.notes} ошибки
+         <br>совершив ${formatErrors(this.currentPlayer.notes)}
         </div>
       <span class="main-comparison">${getResult(this.otherResults, this.currentPlayer)}</span>`;
     }

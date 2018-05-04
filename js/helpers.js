@@ -1,3 +1,5 @@
+const NOTES = 3;
+
 export const formatTime = (value) => value < 10 ? `0` + value : value;
 
 export const formatMin = (current, initial) => {
@@ -22,4 +24,17 @@ export const formatSec = (current, initial) => {
     return `${getSec} секунды`;
   }
   return `${getSec} секунд`;
+};
+
+
+export const formatErrors = (notes) => {
+  const countErrors = NOTES - notes;
+  switch (countErrors) {
+    case 0:
+      return `${countErrors} ошибок`;
+    case 1:
+      return `${countErrors} ошибку`;
+    default:
+      return `${countErrors} ошибки`;
+  }
 };
