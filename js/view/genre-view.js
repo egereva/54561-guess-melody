@@ -4,8 +4,8 @@ export default class GenreView extends AbstractView {
   constructor(state) {
     super();
     this.state = state;
-    this.title = this.state.currentAnswer.title;
-    this.answers = this.state.currentAnswer.answers;
+    this.question = this.state.currentQuestion.question;
+    this.answers = this.state.currentQuestion.answers;
   }
 
   get template() {
@@ -19,7 +19,7 @@ export default class GenreView extends AbstractView {
     </svg>
     
     <div class="main-wrap">
-      <h2 class="title">${this.title}</h2>
+      <h2 class="title">${this.question}</h2>
       <form class="genre">
         ${this.renderAnswers(this.answers)}
         <button class="genre-answer-send" type="submit">Ответить</button>

@@ -24,6 +24,7 @@ export default class HeaderView extends AbstractView {
 
 
   bind() {
+    this.timerItems = this.element.querySelectorAll(`.timer-value span`);
     this.notes = this.element.querySelector(`.main-mistakes`);
     this.min = this.element.querySelector(`.timer-value-mins`);
     this.sec = this.element.querySelector(`.timer-value-secs`);
@@ -38,6 +39,20 @@ export default class HeaderView extends AbstractView {
     this.notes.innerHTML = new Array(NOTES - this.state.notes)
         .fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`)
         .join(``);
+  }
+
+  addBlinkTimer() {
+    Array.from(this.timerItems).forEach((item) => {
+      item.style.color = `red`;
+      item.classList.add(`blink`);
+    });
+  }
+
+  removeBlinkTimer() {
+    Array.from(this.timerItems).forEach((item) => {
+      item.style.color = `#ff9749`;
+      item.classList.remove(`blink`);
+    });
   }
 
 }
