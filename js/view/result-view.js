@@ -1,5 +1,9 @@
 import {getResult} from './../data/get-result';
 import AbstractView from './abstract-view';
+import store from './../data/store';
+import {countFastAnswers} from './../data/count-fast-answers';
+import {formatMin} from './../format-time';
+import {formatSec} from './../format-time';
 
 const NOTES = 3;
 
@@ -28,11 +32,11 @@ export default class ResultView extends AbstractView {
 
 
   setResultScreen() {
-    if (this.currentPlayer.notes <= 0) {
+    if (this.currentPlayer.notes <= 0 || this.currentPlayer.time <= 0) {
       return `<div class="main-stat">${getResult(this.otherResults, this.currentPlayer)}</div>`;
     } else {
-      return `<div class="main-stat">За&nbsp;3&nbsp;минуты и 25&nbsp;секунд
-         <br>вы&nbsp;набрали ${this.currentPlayer.points} баллов (8 быстрых)
+      return `<div class="main-stat">За&nbsp;${formatMin(this.currentPlayer.time, store.initialState.time)} и ${formatSec(this.currentPlayer.time, store.initialState.time)}
+         <br>вы&nbsp;набрали ${this.currentPlayer.points} баллов (${countFastAnswers(store.resultsPlayer)} быстрых)
          <br>совершив ${NOTES - this.currentPlayer.notes} ошибки
         </div>
       <span class="main-comparison">${getResult(this.otherResults, this.currentPlayer)}</span>`;

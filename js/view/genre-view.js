@@ -1,13 +1,11 @@
 import AbstractView from './abstract-view';
-import header from './../screens/header';
-import {setPauseAndPlay} from './../playAndPause';
 
 export default class GenreView extends AbstractView {
-  constructor(question, state) {
+  constructor(state) {
     super();
-    this.title = question.title;
-    this.answers = question.answers;
     this.state = state;
+    this.title = this.state.currentAnswer.title;
+    this.answers = this.state.currentAnswer.answers;
   }
 
   get template() {
@@ -19,8 +17,6 @@ export default class GenreView extends AbstractView {
         class="timer-line"
         style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
     </svg>
-    
-    ${header(this.state.currentState)}
     
     <div class="main-wrap">
       <h2 class="title">${this.title}</h2>
@@ -39,15 +35,6 @@ export default class GenreView extends AbstractView {
       answer.addEventListener(`click`, this.onClickAnswer);
     });
     answerBtn.addEventListener(`click`, this.onClickSubmit);
-  }
-
-  controlPlayer() {
-    const answers = this.element.querySelectorAll(`.genre-answer`);
-    [...answers].forEach((item) => {
-      const playerBtn = item.querySelector(`.player-control`);
-      const audio = item.querySelector(`audio`);
-      setPauseAndPlay(playerBtn, audio);
-    });
   }
 
   resetForm() {

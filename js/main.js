@@ -1,5 +1,5 @@
-import welcomeScreen from './screens/welcome';
+import Application from './application';
 
 /* показывает первый экран из модуля main.js при загрузке страницы */
 
-welcomeScreen();
+Application.showWelcome();

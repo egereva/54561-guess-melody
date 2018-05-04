@@ -1,13 +1,11 @@
 import AbstractView from './abstract-view';
-import header from './../screens/header';
-import {setPauseAndPlay} from './../playAndPause';
 
 export default class ArtistView extends AbstractView {
-  constructor(question, state) {
+  constructor(state) {
     super();
-    this.src = question.src;
-    this.answers = question.answers;
     this.state = state;
+    this.src = this.state.currentAnswer.src;
+    this.answers = this.state.currentAnswer.answers;
   }
 
   get template() {
@@ -20,8 +18,6 @@ export default class ArtistView extends AbstractView {
         style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center">
       </circle>
     </svg>
-    
-    ${header(this.state.currentState)}
     
     <div class="main-wrap">
       <h2 class="title main-title">Кто исполняет эту песню?</h2>
@@ -46,12 +42,6 @@ export default class ArtistView extends AbstractView {
     Array.from(artistOptions).forEach((elem) => {
       elem.addEventListener(`change`, this.onClickAnswer);
     });
-  }
-
-  controlPlayer() {
-    const playerBtn = this.element.querySelector(`.player-control`);
-    const audio = this.element.querySelector(`audio`);
-    setPauseAndPlay(playerBtn, audio);
   }
 
   renderAnswers(answers) {
