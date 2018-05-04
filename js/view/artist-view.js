@@ -4,8 +4,8 @@ export default class ArtistView extends AbstractView {
   constructor(state) {
     super();
     this.state = state;
-    this.src = this.state.currentAnswer.src;
-    this.answers = this.state.currentAnswer.answers;
+    this.src = this.state.currentQuestion.src;
+    this.answers = this.state.currentQuestion.answers;
   }
 
   get template() {
@@ -49,8 +49,8 @@ export default class ArtistView extends AbstractView {
       <div class="main-answer-wrapper">
     <input class="main-answer-r" type="radio" id="answer-${index + 1}" name="answer" value="val-${index + 1}"/>
     <label class="main-answer" for="answer-${index + 1}">
-      <img class="main-answer-preview" src="${answer.image}" alt="${answer.artist}" width="134" height="134">
-        ${answer.artist}
+      <img class="main-answer-preview" src="${answer.image.url}" alt="${answer.title}" width="${answer.image.width}" height="${answer.image.height}">
+        ${answer.title}
       </label>
   </div>`).join(``);
   }

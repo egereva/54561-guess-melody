@@ -5,8 +5,7 @@ import store from './../data/store';
 import HeaderView from './../view/header-view';
 import GenreView from './../view/genre-view';
 import ArtistView from './../view/artist-view';
-import {getRandomQuestion} from './../random-question';
-import questions from './../data/questions';
+import QuestionLoad from './../data/load-questions';
 
 const LEVELS = 10;
 
@@ -19,12 +18,12 @@ class GameScreen {
     this._interval = null;
   }
 
-  getQuestionType(data) {
-    if (data.type === `artist`) {
+  getQuestionType() {
+    if (this.state.currentQuestion.type === `artist`) {
       this.view = new ArtistView(this.state);
       this.renderArtistLevel();
     }
-    if (data.type === `genre`) {
+    if (this.state.currentQuestion.type === `genre`) {
       this.view = new GenreView(this.state);
       this.renderGenreLevel();
     }
@@ -33,8 +32,8 @@ class GameScreen {
   }
 
 
-  init(data) {
-    this.getQuestionType(data);
+  init() {
+    this.getQuestionType();
     this.loadInterval();
     controlPlayer(this.view);
     renderScreen(this.view);
@@ -55,7 +54,7 @@ class GameScreen {
     };
     this.view.onClickSubmit = (evt) => {
       evt.preventDefault();
-      this.checkGenreAnswer(this.answerTime);
+      this.checkGenreAnswer(evt, this.answerTime);
       this.answerTime = 0;
       this.switchScreen();
     };
@@ -84,9 +83,11 @@ class GameScreen {
   }
 
   checkArtistAnswer(evt, answerTime) {
-    const selectedAnswerIdx = evt.currentTarget.parentNode.querySelector(`input`).value.substr(-1);
+    const answers = this.state.currentQuestion.answers;
+    const correctAnswer = answers.filter((answer) => answer.isCorrect).map((answer) => answers.indexOf(answer) + 1).join(``);
+    const selectedAnswerIndex = evt.currentTarget.parentNode.querySelector(`input`).value.substr(-1);
     const currentAnswer = {};
-    if (Number(selectedAnswerIdx) === this.state.currentAnswer.correct) {
+    if (selectedAnswerIndex === correctAnswer) {
       currentAnswer.correct = true;
       currentAnswer.speed = answerTime;
     } else {
@@ -98,15 +99,17 @@ class GameScreen {
   }
 
   checkGenreAnswer(answerTime) {
+    const answers = this.state.currentQuestion.answers;
+    const genreQuestion = this.state.currentQuestion.genre;
+    const correctAnswers = answers.filter((answer) => answer.genre === genreQuestion).map((it) => answers.indexOf(it) + 1);
     const answersCheckbox = this.view.element.querySelectorAll(`input[type=checkbox]`);
     const arr = Array.from(answersCheckbox);
     const answerBtn = this.view.element.querySelector(`.genre-answer-send`);
     const selectedAnswersIndex = arr.filter((it) => it.checked).map((it) => arr.indexOf(it) + 1);
-    const rightAnswer = this.state.currentAnswer.correct;
-    const isRight = selectedAnswersIndex.every((elem) => rightAnswer.indexOf(elem) !== -1 && selectedAnswersIndex.length === rightAnswer.length);
+    const isRight = selectedAnswersIndex.every((elem) => correctAnswers.indexOf(elem) !== -1);
     const currentAnswer = {};
 
-    if (isRight) {
+    if (isRight && selectedAnswersIndex.length === correctAnswers.length) {
       currentAnswer.correct = true;
       currentAnswer.speed = answerTime;
     } else {
@@ -127,19 +130,13 @@ class GameScreen {
   }
 
   switchScreen() {
-    const screens = questions;
-    const displayQuestions = this.state.displayQuestions;
-    let randomQuestion = getRandomQuestion(screens);
-
-    while (displayQuestions.includes(randomQuestion)) {
-      randomQuestion = getRandomQuestion(screens);
-    }
-    this.state.currentAnswer = randomQuestion;
-
     if (this.state.countScreens < LEVELS && this.state.notes > 0) {
-      this.init(this.state.currentAnswer);
-      this.state.addScreen();
-      this.state.addDisplayQuestions(randomQuestion);
+      QuestionLoad.getNextQuestion().then((data) => {
+        this.state.currentQuestion = data;
+        this.state.addScreen();
+        this.init();
+
+      });
     } else {
       Application.showStats();
     }

@@ -4,7 +4,6 @@ class GameStore {
       notes: 3,
       resultsPlayer: [],
       currentResult: [],
-      displayQuestions: [],
       countScreens: 0,
       otherResults: [
         {points: 10, notes: 3, time: 10},
@@ -12,7 +11,7 @@ class GameStore {
         {points: 8, notes: 2, time: 12},
         {points: 6, notes: 1, time: 5}
       ],
-      time: 80
+      time: 300
     });
     this.currentState = Object.assign({}, this.initialState);
   }
@@ -35,10 +34,6 @@ class GameStore {
 
   get currentResult() {
     return this.currentState.currentResult;
-  }
-
-  get displayQuestions() {
-    return this.currentState.displayQuestions;
   }
 
   get time() {
@@ -65,7 +60,6 @@ class GameStore {
     this.currentState = Object.assign({}, this.initialState);
     this.currentState.resultsPlayer = [];
     this.currentState.currentResult = [];
-    this.currentState.displayQuestions = [];
     return this;
   }
 
@@ -74,10 +68,6 @@ class GameStore {
     return this;
   }
 
-  addDisplayQuestions(question) {
-    this.displayQuestions.push(question);
-    return this;
-  }
 
   tick() {
     this.currentState.time--;
