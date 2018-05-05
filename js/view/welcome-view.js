@@ -17,8 +17,18 @@ export default class WelcomeView extends AbstractView {
   }
 
   bind() {
-    const playButton = this.element.querySelector(`.main-play`);
-    playButton.addEventListener(`click`, this.startPlay);
+    this.playButton = this.element.querySelector(`.main-play`);
+    this.playButton.addEventListener(`click`, this.startPlay);
+  }
+
+  disablePlayButton() {
+    this.playButton.style.opacity = `0`;
+    this.playButton.disabled = true;
+  }
+
+  activePlayButton() {
+    this.playButton.style.opacity = `1`;
+    this.playButton.disabled = false;
   }
 
   startPlay() {}

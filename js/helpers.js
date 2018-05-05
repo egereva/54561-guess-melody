@@ -38,3 +38,11 @@ export const formatErrors = (notes) => {
       return `${countErrors} ошибки`;
   }
 };
+
+export const checkResponse = (response) => {
+  if (response.ok) {
+    return response;
+  } else {
+    throw new Error(`${response.status} ${response.statusText} `);
+  }
+};

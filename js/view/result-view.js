@@ -7,9 +7,9 @@ import {formatSec} from '../helpers';
 import {formatErrors} from '../helpers';
 
 export default class ResultView extends AbstractView {
-  constructor(otherResults, currentPlayer, templateResult) {
+  constructor(allResults, currentPlayer, templateResult) {
     super();
-    this.otherResults = otherResults;
+    this.allResults = allResults;
     this.currentPlayer = currentPlayer;
     this.templateResult = templateResult;
   }
@@ -32,13 +32,13 @@ export default class ResultView extends AbstractView {
 
   setResultScreen() {
     if (this.currentPlayer.notes <= 0 || this.currentPlayer.time <= 0) {
-      return `<div class="main-stat">${getResult(this.otherResults, this.currentPlayer)}</div>`;
+      return `<div class="main-stat">${getResult(this.allResults, this.currentPlayer)}</div>`;
     } else {
       return `<div class="main-stat">За&nbsp;${formatMin(this.currentPlayer.time, store.initialState.time)} и ${formatSec(this.currentPlayer.time, store.initialState.time)}
          <br>вы&nbsp;набрали ${this.currentPlayer.points} баллов (${countFastAnswers(store.resultsPlayer)} быстрых)
          <br>совершив ${formatErrors(this.currentPlayer.notes)}
         </div>
-      <span class="main-comparison">${getResult(this.otherResults, this.currentPlayer)}</span>`;
+      <span class="main-comparison">${getResult(this.allResults, this.currentPlayer)}</span>`;
     }
   }
 

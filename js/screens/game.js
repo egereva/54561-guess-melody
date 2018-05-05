@@ -5,7 +5,7 @@ import store from './../data/store';
 import HeaderView from './../view/header-view';
 import GenreView from './../view/genre-view';
 import ArtistView from './../view/artist-view';
-import QuestionLoad from './../data/load-questions';
+import DataLoad from '../data/load-data';
 
 const LEVELS = 10;
 
@@ -18,14 +18,14 @@ class GameScreen {
     this._interval = null;
   }
 
-  getQuestionType() {
+  _getQuestionType() {
     if (this.state.currentQuestion.type === `artist`) {
       this.view = new ArtistView(this.state);
-      this.renderArtistLevel();
+      this._renderArtistLevel();
     }
     if (this.state.currentQuestion.type === `genre`) {
       this.view = new GenreView(this.state);
-      this.renderGenreLevel();
+      this._renderGenreLevel();
     }
     this.view.element.appendChild(this.header.element);
     this.header.updateNotes();
@@ -33,35 +33,35 @@ class GameScreen {
 
 
   init() {
-    this.getQuestionType();
-    this.loadInterval();
+    this._getQuestionType();
+    this._loadInterval();
     controlPlayer(this.view);
     renderScreen(this.view);
   }
 
-  renderArtistLevel() {
+  _renderArtistLevel() {
     this.view.onClickAnswer = (evt) => {
       evt.preventDefault();
-      this.checkArtistAnswer(evt, this.answerTime);
+      this._checkArtistAnswer(evt, this.answerTime);
       this.answerTime = 0;
       this.switchScreen();
     };
   }
 
-  renderGenreLevel() {
+  _renderGenreLevel() {
     this.view.onClickAnswer = () => {
-      this.isAnswerSelected();
+      this._isAnswerSelected();
     };
     this.view.onClickSubmit = (evt) => {
       evt.preventDefault();
-      this.checkGenreAnswer(evt, this.answerTime);
+      this._checkGenreAnswer(evt, this.answerTime);
       this.answerTime = 0;
       this.switchScreen();
     };
 
   }
 
-  loadInterval() {
+  _loadInterval() {
     this.header.updateTime();
     if (this._interval === null) {
       this._interval = setInterval(() => {
@@ -79,14 +79,14 @@ class GameScreen {
     }
   }
 
-  isAnswerSelected() {
+  _isAnswerSelected() {
     const answersCheckbox = this.view.element.querySelectorAll(`input[type=checkbox]`);
     const answerBtn = this.view.element.querySelector(`.genre-answer-send`);
-    let isSubmitEnabled = Array.from(answersCheckbox).some((it) => it.checked);
-    answerBtn.disabled = !isSubmitEnabled;
+    let isBtnActive = Array.from(answersCheckbox).some((it) => it.checked);
+    answerBtn.disabled = !isBtnActive;
   }
 
-  checkArtistAnswer(evt, answerTime) {
+  _checkArtistAnswer(evt, answerTime) {
     const answers = this.state.currentQuestion.answers;
     const correctAnswer = answers.filter((answer) => answer.isCorrect).map((answer) => answers.indexOf(answer) + 1).join(``);
     const selectedAnswerIndex = evt.currentTarget.parentNode.querySelector(`input`).value.substr(-1);
@@ -102,7 +102,7 @@ class GameScreen {
     this.state.appendAnswer(currentAnswer);
   }
 
-  checkGenreAnswer(answerTime) {
+  _checkGenreAnswer(answerTime) {
     const answers = this.state.currentQuestion.answers;
     const genreQuestion = this.state.currentQuestion.genre;
     const correctAnswers = answers.filter((answer) => answer.genre === genreQuestion).map((it) => answers.indexOf(it) + 1);
@@ -123,7 +123,6 @@ class GameScreen {
     }
 
     this.state.appendAnswer(currentAnswer);
-
     this.view.resetForm();
     answerBtn.disabled = true;
   }
@@ -135,12 +134,9 @@ class GameScreen {
 
   switchScreen() {
     if (this.state.countScreens < LEVELS && this.state.notes > 0) {
-      QuestionLoad.getNextQuestion().then((data) => {
-        this.state.currentQuestion = data;
-        this.state.addScreen();
-        this.init();
-
-      });
+      this.state.currentQuestion = DataLoad.getNextQuestion();
+      this.state.addScreen();
+      this.init();
     } else {
       Application.showStats();
     }
