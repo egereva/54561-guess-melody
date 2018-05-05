@@ -31,7 +31,6 @@ class GameScreen {
     this.header.updateNotes();
   }
 
-
   init() {
     this._getQuestionType();
     this._loadInterval();

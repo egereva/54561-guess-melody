@@ -27,13 +27,13 @@ class DataLoad {
     return this.questions[this.state.countScreens];
   }
 
-  static loadResult() {
+  loadResult() {
     return fetch(`${SERVER_URL}/stats/${APP_ID}`).
         then(checkResponse).
         then((response) => response.json());
   }
 
-  static saveResults(data) {
+  saveResults(data) {
     const requestSettings = {
       method: `POST`,
       body: JSON.stringify(data),
@@ -44,7 +44,7 @@ class DataLoad {
     return fetch(`${SERVER_URL}/stats/${APP_ID}`, requestSettings).then(checkResponse);
   }
 
-  static getError(error) {
+  getError(error) {
     const errorView = new ErrorView(error);
     renderScreen(errorView);
   }
