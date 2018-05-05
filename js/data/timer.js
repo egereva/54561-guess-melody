@@ -10,7 +10,7 @@ export default class Timer {
     }
 
     if (this.time === 0) {
-      return (`Time is over`);
+      return `Time is over`;
     }
 
     return this.time;

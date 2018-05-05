@@ -16,8 +16,8 @@ export default class WelcomeScreen {
       evt.preventDefault();
       Application.showGame();
     };
-    const logo = this.view.element.querySelector(`.main`);
-    this.view.element.insertBefore(this.loader.element, logo);
+    const item = this.view.element.querySelector(`.main`);
+    this.view.element.insertBefore(this.loader.element, item);
     this.view.disablePlayButton();
     DataLoad.loadQuestions().then((data) => this.loader.preloadAudio(data)).then(() => this.view.activePlayButton());
     renderScreen(this.view);

@@ -2,9 +2,7 @@ import {getResult} from './../data/get-result';
 import AbstractView from './abstract-view';
 import store from './../data/store';
 import {countFastAnswers} from './../data/count-fast-answers';
-import {formatMin} from '../helpers';
-import {formatSec} from '../helpers';
-import {formatErrors} from '../helpers';
+import {formatMin, formatSec, formatErrors} from '../helpers';
 
 export default class ResultView extends AbstractView {
   constructor(allResults, currentPlayer, templateResult) {
