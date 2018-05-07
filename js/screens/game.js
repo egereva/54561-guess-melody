@@ -5,10 +5,8 @@ import store from './../data/store';
 import HeaderView from './../view/header-view';
 import GenreView from './../view/genre-view';
 import ArtistView from './../view/artist-view';
-import DataLoad from '../data/load-data';
-
-const LEVELS = 10;
-
+import DataService from '../data/load-data';
+import {LEVELS} from './../data/game-options';
 
 class GameScreen {
   constructor(state) {
@@ -126,14 +124,14 @@ class GameScreen {
     answerBtn.disabled = true;
   }
 
-  stopGame() {
+  stopRound() {
     clearInterval(this._interval);
     this._interval = null;
   }
 
   switchScreen() {
     if (this.state.countScreens < LEVELS && this.state.notes > 0) {
-      this.state.currentQuestion = DataLoad.getNextQuestion();
+      this.state.currentQuestion = DataService.getNextQuestion();
       this.state.addScreen();
       this.init();
     } else {

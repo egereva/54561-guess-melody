@@ -1,8 +1,7 @@
 import {assert} from 'chai';
 
 import {countPoints} from './count-points';
-
-const NOTES = 3;
+import {NOTES} from './game-options';
 
 const gameOverErrors = [
   {correct: true, speed: 60}, {correct: false, speed: 35}, {correct: true, speed: 50},

@@ -9,7 +9,7 @@ export default class LoaderView extends AbstractView {
 
   get template() {
     return `
-      <div class="loader" style="text-align: center; color: #000;">
+      <div class="loader" style="text-align: center; color: green; font-weight: bold;">
         <p>Загрузка аудио файлов...</p>
       </div>
       `;

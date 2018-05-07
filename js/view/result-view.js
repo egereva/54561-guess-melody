@@ -17,7 +17,7 @@ export default class ResultView extends AbstractView {
 		<section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
     <h2 class="title">${this.templateResult.h2}</h2>
-    ${this.setResultScreen()}
+    ${this.setFinalScreen()}
     <span role="button" tabindex="0" class="main-replay">${this.templateResult.button}</span>
   </section>`;
   }
@@ -28,7 +28,7 @@ export default class ResultView extends AbstractView {
   }
 
 
-  setResultScreen() {
+  setFinalScreen() {
     if (this.currentPlayer.notes <= 0 || this.currentPlayer.time <= 0) {
       return `<div class="main-stat">${getResult(this.allResults, this.currentPlayer)}</div>`;
     } else {

@@ -18,7 +18,7 @@ const RESULT_TEXT = {
   }
 };
 
-export default class ResultScreen {
+export default class FinalScreen {
   constructor(state) {
     this.state = state;
   }

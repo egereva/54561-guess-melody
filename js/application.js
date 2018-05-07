@@ -1,10 +1,9 @@
 import WelcomeScreen from './screens/welcome';
-import ResultScreen from './screens/result-screen';
+import FinalScreen from './screens/result-screen';
 import GameScreen from './screens/game';
 import store from './data/store';
-import DataLoad from './data/load-data';
-
-const LEVELS = 10;
+import DataService from './data/load-data';
+import {LEVELS} from './data/game-options';
 
 export default class Application {
 
@@ -18,11 +17,11 @@ export default class Application {
   }
 
   static showStats() {
-    GameScreen.stopGame();
-    const result = new ResultScreen(store);
+    GameScreen.stopRound();
+    const result = new FinalScreen(store);
     if (store.resultsPlayer.length === LEVELS) {
-      DataLoad.saveResults(store.resultsPlayer).
-          then(() => DataLoad.loadResult()).
+      DataService.saveResults(store.resultsPlayer).
+          then(() => DataService.loadResult()).
           then((data) => result.showResult(data));
     } else {
       result.showResult();
