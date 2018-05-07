@@ -4,7 +4,7 @@ export const getElementFromTemplate = (template) => {
   let element = document.createElement(`div`);
   element.innerHTML = template;
 
-  return element;
+  return element.children[0];
 };
 
 

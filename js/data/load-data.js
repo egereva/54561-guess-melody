@@ -6,7 +6,7 @@ import {checkResponse} from './../helpers';
 const SERVER_URL = `https://es.dump.academy/guess-melody`;
 const APP_ID = 54561;
 
-class DataLoad {
+class DataService {
   constructor(state) {
     this.questions = [];
     this.state = state;
@@ -51,6 +51,6 @@ class DataLoad {
 }
 
 
-const dataLoad = new DataLoad(store);
+const dataService = new DataService(store);
 
-export default dataLoad;
+export default dataService;

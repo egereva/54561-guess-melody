@@ -1,7 +1,7 @@
-const mainScreen = document.querySelector(`.main`);
+const app = document.querySelector(`.app`);
 
 export const renderScreen = (screen) => {
-  mainScreen.innerHTML = ``;
-  mainScreen.appendChild(screen.element);
+  app.innerHTML = ``;
+  app.appendChild(screen.element);
 
 };
